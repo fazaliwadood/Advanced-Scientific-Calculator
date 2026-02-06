@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Scientific Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator-header">
+            <div class="calculator-title">
+                <i class="fas fa-calculator"></i>
+                Advanced Scientific Calculator
+            </div>
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="basicMode">Basic</button>
+                <button class="mode-btn" id="scientificMode">Scientific</button>
+                <button class="mode-btn" id="programmerMode">Programmer</button>
+            </div>
+        </div>
+        
+        <div class="calculator-body">
+            <div class="display-section">
+                <div class="calculator-display">
+                    <div class="expression-display" id="expressionDisplay"></div>
+                    <div class="current-input" id="display">0</div>
+                    <div class="memory-indicator" id="memoryIndicator"></div>
+                </div>
+                
+                <div class="memory-section">
+                    <div class="section-title">
+                        <i class="fas fa-memory"></i>
+                        Memory Functions
+                    </div>
+                    <div class="memory-buttons">
+                        <button class="btn btn-memory" data-action="memoryClear">MC</button>
+                        <button class="btn btn-memory" data-action="memoryRecall">MR</button>
+                        <button class="btn btn-memory" data-action="memoryAdd">M+</button>
+                        <button class="btn btn-memory" data-action="memorySubtract">M-</button>
+                        <button class="btn btn-memory" data-action="memoryStore">MS</button>
+                    </div>
+                </div>
+                
+                <div class="history-section">
+                    <div class="section-title">
+                        <i class="fas fa-history"></i>
+                        Calculation History
+                        <button class="clear-history-btn" id="clearHistoryBtn">Clear</button>
+                    </div>
+                    <div class="history-list" id="historyList">
+                        <!-- History items will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons-section">
+                <div class="buttons-container" id="basicButtons">
+                    <!-- Basic calculator buttons -->
+                    <button class="btn btn-clear" data-action="clear">C</button>
+                    <button class="btn btn-clear" data-action="clearEntry">CE</button>
+                    <button class="btn btn-delete" data-action="delete">⌫</button>
+                    <button class="btn btn-operator" data-action="divide">÷</button>
+                    
+                    <button class="btn btn-scientific" data-action="square">x²</button>
+                    <button class="btn btn-number" data-number="7">7</button>
+                    <button class="btn btn-number" data-number="8">8</button>
+                    <button class="btn btn-number" data-number="9">9</button>
+                    <button class="btn btn-operator" data-action="multiply">×</button>
+                    
+                    <button class="btn btn-scientific" data-action="power">x<sup>y</sup></button>
+                    <button class="btn btn-number" data-number="4">4</button>
+                    <button class="btn btn-number" data-number="5">5</button>
+                    <button class="btn btn-number" data-number="6">6</button>
+                    <button class="btn btn-operator" data-action="subtract">−</button>
+                    
+                    <button class="btn btn-scientific" data-action="sqrt">√</button>
+                    <button class="btn btn-number" data-number="1">1</button>
+                    <button class="btn btn-number" data-number="2">2</button>
+                    <button class="btn btn-number" data-number="3">3</button>
+                    <button class="btn btn-operator" data-action="add">+</button>
+                    
+                    <button class="btn btn-scientific" data-action="percent">%</button>
+                    <button class="btn btn-number" data-number="0">0</button>
+                    <button class="btn" data-action="decimal">.</button>
+                    <button class="btn btn-scientific" data-action="inverse">1/x</button>
+                    <button class="btn btn-equals" data-action="equals">=</button>
+                </div>
+                
+                <div class="buttons-container scientific-hidden" id="scientificButtons">
+                    <!-- Scientific calculator buttons -->
+                    <button class="btn btn-scientific" data-action="sin">sin</button>
+                    <button class="btn btn-scientific" data-action="cos">cos</button>
+                    <button class="btn btn-scientific" data-action="tan">tan</button>
+                    <button class="btn btn-scientific" data-action="pi">π</button>
+                    <button class="btn btn-operator" data-action="divide">÷</button>
+                    
+                    <button class="btn btn-scientific" data-action="asin">sin⁻¹</button>
+                    <button class="btn btn-scientific" data-action="acos">cos⁻¹</button>
+                    <button class="btn btn-scientific" data-action="atan">tan⁻¹</button>
+                    <button class="btn btn-scientific" data-action="e">e</button>
+                    <button class="btn btn-operator" data-action="multiply">×</button>
+                    
+                    <button class="btn btn-scientific" data-action="log">log</button>
+                    <button class="btn btn-scientific" data-action="ln">ln</button>
+                    <button class="btn btn-scientific" data-action="exp">e<sup>x</sup></button>
+                    <button class="btn btn-scientific" data-action="factorial">x!</button>
+                    <button class="btn btn-operator" data-action="subtract">−</button>
+                    
+                    <button class="btn btn-scientific" data-action="abs">|x|</button>
+                    <button class="btn btn-scientific" data-action="floor">floor</button>
+                    <button class="btn btn-scientific" data-action="ceil">ceil</button>
+                    <button class="btn btn-scientific" data-action="round">round</button>
+                    <button class="btn btn-operator" data-action="add">+</button>
+                    
+                    <button class="btn btn-scientific" data-action="degRad">DEG/RAD</button>
+                    <button class="btn btn-number" data-number="(">(</button>
+                    <button class="btn btn-number" data-number=")">)</button>
+                    <button class="btn btn-scientific" data-action="random">Rand</button>
+                    <button class="btn btn-equals" data-action="equals">=</button>
+                </div>
+                
+                <div class="buttons-container scientific-hidden" id="programmerButtons">
+                    <!-- Programmer calculator buttons -->
+                    <button class="btn btn-scientific" data-action="binary">BIN</button>
+                    <button class="btn btn-scientific" data-action="octal">OCT</button>
+                    <button class="btn btn-scientific" data-action="decimalSystem">DEC</button>
+                    <button class="btn btn-scientific" data-action="hexadecimal">HEX</button>
+                    <button class="btn btn-operator" data-action="divide">÷</button>
+                    
+                    <button class="btn btn-scientific" data-action="and">AND</button>
+                    <button class="btn btn-scientific" data-action="or">OR</button>
+                    <button class="btn btn-scientific" data-action="xor">XOR</button>
+                    <button class="btn btn-scientific" data-action="not">NOT</button>
+                    <button class="btn btn-operator" data-action="multiply">×</button>
+                    
+                    <button class="btn btn-scientific" data-action="leftShift">«</button>
+                    <button class="btn btn-scientific" data-action="rightShift">»</button>
+                    <button class="btn btn-scientific" data-action="modulo">MOD</button>
+                    <button class="btn btn-scientific" data-action="toggleBit">~</button>
+                    <button class="btn btn-operator" data-action="subtract">−</button>
+                    
+                    <button class="btn btn-number" data-number="A">A</button>
+                    <button class="btn btn-number" data-number="B">B</button>
+                    <button class="btn btn-number" data-number="C">C</button>
+                    <button class="btn btn-number" data-number="D">D</button>
+                    <button class="btn btn-operator" data-action="add">+</button>
+                    
+                    <button class="btn btn-number" data-number="E">E</button>
+                    <button class="btn btn-number" data-number="F">F</button>
+                    <button class="btn btn-scientific" data-action="clearBits">CLR</button>
+                    <button class="btn btn-scientific" data-action="bitToggle">BIT</button>
+                    <button class="btn btn-equals" data-action="equals">=</button>
+                </div>
+                
+                <div class="conversion-section">
+                    <div class="section-title">
+                        <i class="fas fa-exchange-alt"></i>
+                        Unit Conversions
+                    </div>
+                    <div class="conversion-buttons">
+                        <button class="btn btn-conversion" data-action="convertLength">Length</button>
+                        <button class="btn btn-conversion" data-action="convertWeight">Weight</button>
+                        <button class="btn btn-conversion" data-action="convertTemperature">Temp</button>
+                        <button class="btn btn-conversion" data-action="convertCurrency">Currency</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="calculator-footer">
+            <div class="footer-info">
+                <div class="mode-indicator">
+                    Current Mode: <span id="currentMode">Basic</span>
+                </div>
+                <div class="angle-mode">
+                    Angle: <span id="angleMode">DEG</span>
+                </div>
+                <div class="real-world-tools">
+                    <button class="tool-btn" data-action="solveEquation">
+                        <i class="fas fa-equation"></i> Equation Solver
+                    </button>
+                    <button class="tool-btn" data-action="geometryCalculator">
+                        <i class="fas fa-shapes"></i> Geometry
+                    </button>
+                    <button class="tool-btn" data-action="statisticsTool">
+                        <i class="fas fa-chart-bar"></i> Statistics
+                    </button>
+                </div>
+            </div>
+            
+            <div class="footer-note">
+                <p>Advanced calculator with <span class="highlight">multiple modes</span>, <span class="highlight">unit conversions</span>, and <span class="highlight">real-world tools</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for unit conversions -->
+    <div class="modal" id="conversionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Unit Conversion</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Modal content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="cal.js"></script>
+</body>
+</html>
